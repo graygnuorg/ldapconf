@@ -26,7 +26,7 @@ func TestText(t *testing.T) {
 
   # One more comment
 base dc=example,dc=com
-      
+
 
 
 use_tls	true
@@ -53,4 +53,3 @@ uri	ldap://a	ldapi://b
 		t.Fatalf("expectation failed: %#v\n", in)
 	}
 }
-

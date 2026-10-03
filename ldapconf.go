@@ -65,7 +65,7 @@ func unmarshalValue(kind reflect.Kind, fval reflect.Value, cval string) error {
 	} else {
 		if fval.IsNil() {
 			fval.Set(reflect.New(fval.Type().Elem()))
-		} 
+		}
 		pval = fval
 	}
 	if pval.CanInterface() {
@@ -168,7 +168,7 @@ func unmarshalValue(kind reflect.Kind, fval reflect.Value, cval string) error {
 		if err := unmarshalSlice(fval, cval); err != nil {
 			return err
 		}
-		
+
 	default:
 		return fmt.Errorf("unsupported field type: %v", kind)
 
@@ -196,14 +196,14 @@ func unmarshalSlice(fval reflect.Value, cval string) error {
 	fields := strings.Fields(cval)
 	l := len(fields)
 	result := reflect.MakeSlice(reflect.SliceOf(eltype), l, l)
-	
+
 	for i := 0; i < l; i++ {
-                elt := reflect.New(eltype).Elem()
+		elt := reflect.New(eltype).Elem()
 		if err := unmarshalValue(kind, elt, fields[i]); err != nil {
-        		return err
+			return err
 		}
-                result.Index(i).Set(elt)
-        }
+		result.Index(i).Set(elt)
+	}
 	fval.Set(result)
 	return nil
 }
